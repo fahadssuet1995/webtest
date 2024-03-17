@@ -438,3 +438,8 @@
     padding-right: 0;
     border-right: none;
 }
+
+.custom-table-width {
+    width: 95%;
+    margin: 0 auto; /* Center the table */
+}
