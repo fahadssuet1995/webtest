@@ -52,7 +52,7 @@ get(agentsRef).then((snapshot) => {
                 
             </div>
             <div class="col-md-9 p-5 mt-lg-3">
-                    <h3>About Us</h1>
+                    <h3>About</h1>
                     <p>${agentsData.about}</p>
                 </div>
     `;
