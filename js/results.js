@@ -28,63 +28,55 @@ if (searchTerm !== '') {
 
     onValue(agentsRef, (snapshot) => {
         const agentsData = snapshot.val();
-        const resultsTableBody = document.getElementById('resultsTableBody');
+        const resultsTableBody = document.getElementById('result');
         resultsTableBody.innerHTML = '';
+        resultsTableBody.innerHTML = '<h1 class="display-5 animated fadeIn mb-4"></h1> <h1 class="display-5 animated fadeIn mb-4"></h1>';
 
-        agentsData.forEach((agent) => {
+        agentsData.forEach((agent, index) => {
             if (agent.name.toLowerCase().includes(searchTerm.toLowerCase())) {
-                const newRow = resultsTableBody.insertRow();
 
 
-
-
-                const nameCell = newRow.insertCell(0);
-                const expyr = newRow.insertCell(1);
-                const brnum = newRow.insertCell(2);
-                const phoneCell = newRow.insertCell(3);
-                const emailCell = newRow.insertCell(4);
-                const imageCell = newRow.insertCell(5);
-                const profCell = newRow.insertCell(6);
-
-
-                nameCell.textContent = agent.name;
-                phoneCell.textContent = agent.phone;
-                expyr.textContent = agent.expyr;
-                brnum.textContent = agent.brnum;
+                const card = document.createElement('div');
+                //brnum.textContent = agent.brnum;
                 //imageCell.innerHTML = `<img src="${agent.image}">`;
-                imageCell.innerHTML = `<img src="${agent.profileIMG}" style="width: 100px; height: 80px;">`;
-                emailCell.textContent = agent.email;
-
-                const sourceLink = document.createElement('a');
-                sourceLink.href = agent.source;
-                sourceLink.textContent = 'View Profile';
-                sourceLink.target = '_blank';
-                profCell.appendChild(sourceLink);
+                card.innerHTML = `
+                        <a class="col" href="about.html?index=${index}" >
+                            <div class="card mb-3 shadow p-3 mb-5 bg-body rounded" style="max-width: 540px;">
+                                <div class="row g-0 ">
+                                    <div class="col-md-4">
+                                        <img src="${agent.profileIMG}" class="img-fluid rounded-start">
+                                    </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title">${agent.name}</h5>
+                                                <p class="card-text">${agent.post}</p>
+                                                <p class="card-text">${agent.comp}</p>
+                                                <p class="card-text"><small class="text-muted">No. of properties  ${agent.nofprop}</small></p>
+                                                <span id="rateMe2" class="stars">
+                                                    <i class="bi bi-star" data-index="1"></i>
+                                                    <i class="bi bi-star" data-index="2"></i>
+                                                    <i class="bi bi-star" data-index="3"></i>
+                                                    <i class="bi bi-star" data-index="4"></i>
+                                                    <i class="bi bi-star" data-index="5"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </a>
+              `;
+                resultsTableBody.appendChild(card);
+                //emailCell.textContent = agent.email;
 
                 //console.log(agent.name);
                 //window.location.href = `results.html?results=${JSON.stringify(agent)}`
             }
         })
+        $('#spinner').removeClass('show');
     });
 }
 
 
-/*searchButton.addEventListener('click', () => {
-    const searchTerm = results
-
-    if (searchTerm !== '') {
-        const agentsRef = ref(database, 'data');
-
-        onValue(agentsRef, (snapshot) => {
-            const agentsData = snapshot.val();
-
-            agentsData.forEach((agent) => {
-                if (agent.name.toLowerCase().includes(searchTerm.toLowerCase())) {
-                    matchingAgents.push(agent);
-                    console.log(agent);
-                    //window.location.href = `results.html?results=${JSON.stringify(agent)}`
-                }
-            })
-        });
-    }
-});*/
+searchButton.addEventListener('click', () => {
+    window.location.href = `results.html?input=${searchInput.value}`;
+});
