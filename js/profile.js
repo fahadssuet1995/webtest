@@ -39,7 +39,7 @@ get(agentsRef).then((snapshot) => {
                     <h3 class=" animated fadeIn mb-4">${agentsData.post}</h3>
                     <div id="result" class="row row-cols-1 row-cols-md-2">
                     <p class="animated fadeIn mb-3">Company: ${agentsData.comp}</p>
-                    <p class="animated fadeIn mb-3">Registration: ${agentsData.brnum}</p>
+                    <p class="animated fadeIn mb-3">BRN: ${agentsData.brnum}</p>
                     <p class="animated fadeIn mb-3">Email: ${agentsData.email}</p>
                     <p class="animated fadeIn mb-3">Phone: ${agentsData.phone}</p>
                     <p class="animated fadeIn mb-3">Whatsapp: ${agentsData.wapp}</p>
