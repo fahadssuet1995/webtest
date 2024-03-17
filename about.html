@@ -48,10 +48,7 @@
         <div class="container-fluid nav-bar bg-transparent">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
                 <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
-                    <div class="icon p-2 me-2">
-                        <img class="img-fluid" src="img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
-                    </div>
-                    <h1 class="m-0 text-primary">Makaan</h1>
+                    <img class="img-fluid" src="img/bigbetter.jpeg" alt="Icon" style="width: 150px; height: 50px;">
                 </a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -85,8 +82,11 @@
 
 
         <!-- Header Start -->
-        <div class="container-fluid header bg-white p-0">
-            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+        <div id="profile" class="container-fluid header bg-white p-0">
+           <!----- <div class="row g-0 align-items-center flex-column-reverse flex-md-row" style="margin-top: 8rem;">
+                <div class="col-md-3 animated fadeIn">
+                    <img class="img-thumbnail rounded-circle" style=" object-fit:inherit;" src="img/team-1.jpg" alt="">
+                </div>
                 <div class="col-md-6 p-5 mt-lg-5">
                     <h1 class="display-5 animated fadeIn mb-4">About Us</h1>
                     <nav aria-label="breadcrumb animated fadeIn">
@@ -97,9 +97,7 @@
                         </ol>
                     </nav>
                 </div>
-                <div class="col-md-6 animated fadeIn">
-                    <img class="img-fluid" src="img/header.jpg" alt="">
-                </div>
+                ------>
             </div>
         </div>
         <!-- Header End -->
@@ -112,7 +110,7 @@
                     <div class="col-md-10">
                         <div class="row g-2">
                             <div class="col-md-4">
-                                <input type="text" class="form-control border-0 py-3" placeholder="Search Keyword">
+                                <input id="searchKeyword" type="text" class="form-control border-0 py-3" placeholder="Search Keyword">
                             </div>
                             <div class="col-md-4">
                                 <select class="form-select border-0 py-3">
@@ -131,8 +129,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-dark border-0 w-100 py-3" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">Search</button>
+                        <button id="searchBtn" class="btn btn-dark border-0 w-100 py-3">Search</button>
                     </div>
                 </div>
             </div>
@@ -160,27 +157,7 @@
 
 
         <!-- About Start -->
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="row g-5 align-items-center">
-                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                        <div class="about-img position-relative overflow-hidden p-5 pe-0">
-                            <img class="img-fluid w-100" src="img/about.jpg">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                        <h1 class="mb-4">#1 Place To Find The Perfect Property</h1>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet
-                            diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna
-                            dolore erat amet</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore erat amet</p>
-                        <a class="btn btn-primary py-3 px-5 mt-3" href="">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <!-- About End -->
 
 
@@ -319,29 +296,7 @@
                         <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
                         <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Photo Gallery</h5>
-                        <div class="row g-2 pt-2">
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-1.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-2.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-3.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-4.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-5.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-6.jpg" alt="">
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">Newsletter</h5>
                         <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
@@ -392,30 +347,7 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-    <script>
-        // Fetching data from data.json
-        fetch('output.json')
-            .then(response => response.json())
-            .then(data => {
-                const selectOption = document.getElementById('selectOption');
-                const searchBtn = document.getElementById('searchBtn');
-
-                // Event listener for the search button
-                searchBtn.addEventListener('click', () => {
-                    // Checking if "Agent" is selected
-                    if (selectOption.value === 'Agent') {
-                        // Extracting agent names
-                        const agentNames = data.map(agent => agent.Name);
-                        console.log(agentNames);
-                        // You can use agentNames to display or perform further actions
-                    } else {
-                        // Do nothing if "Location" is selected
-                        console.log('Location selected');
-                    }
-                });
-            })
-            .catch(error => console.error('Error fetching data:', error));
-    </script>
+    <script type="module" src="js/profile.js"></script>
 </body>
 
 </html>
