@@ -34,16 +34,16 @@ get(agentsRef).then((snapshot) => {
                 <div class="col-md-3 animated fadeIn">
                     <img class="img-thumbnail rounded-circle" style=" object-fit: cover;" src="${agentsData.profileIMG}" alt="">
                 </div>
-                <div class="col-md-5 p-3 mt-lg-3">
-                    <h1 class="display-5 animated fadeIn mb-4">${agentsData.name}</h1>
-                    <h3 class=" animated fadeIn mb-4">${agentsData.post}</h3>
+                <div class="col-md-5 p-2 mt-lg-2 mb-3">
+                        <h1 class="display-5 animated fadeIn mb-4">${agentsData.name}</h1>
+                        <h3 class=" animated fadeIn mb-4">${agentsData.post}</h3>
                     <div id="result" class="row row-cols-1 row-cols-md-2">
-                    <p class="animated fadeIn mb-3">Company: ${agentsData.comp}</p>
-                    <p class="animated fadeIn mb-3">BRN: ${agentsData.brnum}</p>
-                    <p class="animated fadeIn mb-3">Email: ${agentsData.email}</p>
-                    <p class="animated fadeIn mb-3">Phone: ${agentsData.phone}</p>
-                    <p class="animated fadeIn mb-3">Whatsapp: ${agentsData.wapp}</p>
-                    <p class="animated fadeIn mb-5">Languages: ${agentsData.lan}</p>
+                        <p class="animated fadeIn mb-3">Company: ${agentsData.comp}</p>
+                        <p class="animated fadeIn mb-3">Registration: ${agentsData.brnum}</p>
+                        <p class="animated fadeIn mb-3">${agentsData.email}</p>
+                        <p class="animated fadeIn mb-5">Languages: ${agentsData.lan}</p>
+                        <a class="bi bi-telephone-outbound" href="tel:${agentsData.phone}"> Call Now</a></a>
+                        <a class="bi bi-whatsapp animated fadeIn mb-3" href="https://wa.me/${agentsData.wapp}"> Whatsapp</a>
                     </div>
                     <a class="animated fadeIn mb-2">Areas: ${agentsData.a1}, ${agentsData.a2}, ${agentsData.a3}</a>
                     <p class="animated fadeIn mb-4"><small class="text-muted">No. of properties  ${agentsData.nofprop}</small></p>
@@ -52,7 +52,7 @@ get(agentsRef).then((snapshot) => {
                 
             </div>
             <div class="col-md-9 p-5 mt-lg-3">
-                    <h3>About</h1>
+                    <h3>About Us</h1>
                     <p>${agentsData.about}</p>
                 </div>
     `;
