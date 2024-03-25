@@ -1,4 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 const firebaseConfig = {
     apiKey: "AIzaSyBeUNbYNaqXbWHxH4CyFMAUyqFYDQd38Ic",
@@ -12,6 +13,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+const auth = getAuth(app);
+
 
 const searchButton = document.getElementById('searchBtn');
 const searchInput = document.getElementById('searchKeyword');
@@ -20,6 +23,10 @@ const urlParams = new URLSearchParams(window.location.search);
 const number = urlParams.get('index');
 console.log(number);
 const body = document.getElementById('profile');
+const agentEmail = document.getElementById('agentEmail');
+const claimbtn = document.getElementById('claimBtn');
+const password = document.getElementById('password');
+
 
 const searchTerm = number
 
@@ -47,65 +54,35 @@ get(agentsRef).then((snapshot) => {
                     </div>
                     <a class="animated fadeIn mb-2">Areas: ${agentsData.a1}, ${agentsData.a2}, ${agentsData.a3}</a>
                     <p class="animated fadeIn mb-4"><small class="text-muted">No. of properties  ${agentsData.nofprop}</small></p>
-                </div>
-                
-                
+                </div> 
             </div>
             <div class="col-md-9 p-5 mt-lg-3">
                     <h3>About Us</h1>
                     <p>${agentsData.about}</p>
+                    <button type="button" class="btn btn-primary" id ="showModal">Show Modal</button>
                 </div>
     `;
+    agentEmail.innerHTML = agentsData.email;
+    const showModalb = document.getElementById('showModal');
+    showModalb.addEventListener('click', () => {
+        const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        modal.show();
+    })
+    claimbtn.addEventListener('click', () => {
+        createUserWithEmailAndPassword(auth, agentsData.email, password.value).then ((userCredential) => {
+            console.log(userCredential.user)
+            sendEmailVerification(userCredential.user)
+            alert("Successfully Claimed! Please check your email inbox to verify")
+        }).catch((error) => {
+            alert(error)
+        })
+    })
+
 })
 
-/*onValue(agentsRef, (snapshot) => {
-    const agentsData = snapshot.val();
-    const resultsTableBody = document.getElementById('profile');
-    resultsTableBody.innerHTML = '';
-    resultsTableBody.innerHTML = '<h1 class="display-5 animated fadeIn mb-4"></h1> <h1 class="display-5 animated fadeIn mb-4"></h1>';
+document.addEventListener('DOMContentLoaded', () => {
 
-    agentsData.forEach((agent, index) => {
-        if (agent.name.toLowerCase().includes(searchTerm.toLowerCase())) {
-
-
-            const card = document.createElement('div');
-            //brnum.textContent = agent.brnum;
-            //imageCell.innerHTML = `<img src="${agent.image}">`;
-            card.innerHTML = `
-                        <a class="col" href="about.html?index=${index}" >
-                            <div class="card mb-3 shadow p-3 mb-5 bg-body rounded" style="max-width: 540px;">
-                                <div class="row g-0 ">
-                                    <div class="col-md-4">
-                                        <img src="${agent.profileIMG}" class="img-fluid rounded-start">
-                                    </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                <h5 class="card-title">${agent.name}</h5>
-                                                <p class="card-text">${agent.post}</p>
-                                                <p class="card-text">${agent.comp}</p>
-                                                <p class="card-text"><small class="text-muted">No. of properties  ${agent.nofprop}</small></p>
-                                                <span id="rateMe2" class="stars">
-                                                    <i class="bi bi-star" data-index="1"></i>
-                                                    <i class="bi bi-star" data-index="2"></i>
-                                                    <i class="bi bi-star" data-index="3"></i>
-                                                    <i class="bi bi-star" data-index="4"></i>
-                                                    <i class="bi bi-star" data-index="5"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                        </a>
-              `;
-            resultsTableBody.appendChild(card);
-            //emailCell.textContent = agent.email;
-
-            //console.log(agent.name);
-            //window.location.href = `results.html?results=${JSON.stringify(agent)}`
-        }
-    })
-    $('#spinner').removeClass('show');
-});*/
+})
 
 
 

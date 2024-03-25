@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getDatabase, ref, onValue, get, update } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 import { getStorage, ref as stRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 const firebaseConfig = {
     apiKey: "AIzaSyBeUNbYNaqXbWHxH4CyFMAUyqFYDQd38Ic",
     authDomain: "betteragent-776b4.firebaseapp.com",
@@ -15,12 +16,24 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const storage = getStorage(app);
 
+const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/auth.user
+    const uid = user.uid;
+    console.log(uid);
+    // ...
+  } else {
+    window.location.href = 'login.html';
+  }
+})
+
 
 const urlParams = new URLSearchParams(window.location.search);
 const number = urlParams.get('index');
 console.log(number);
 const body = document.getElementById('profile');
-
 const searchTerm = number
 
 
@@ -36,7 +49,9 @@ get(agentsRef).then((snapshot) => {
                     <input class="form-control" type="file" id="formFile">
                 </div>
                 <div class="col-md-5 p-3 mt-lg-3">
+                    <label style="border-width: 0px;" >Name</label>
                     <input id="name" style="border-width: 0px;" class="display-5 animated fadeIn mb-4" value="${agentsData.name}"></input>
+                    <label style="border-width: 0px;" class="animated fadeIn mb-3">Post: </label>
                     <input id="post" style="border-width: 0px;" class=" animated fadeIn mb-4" value="${agentsData.post}"></input>
                     <div id="result" class="row row-cols-1 row-cols-md-2">
                         <label class="animated fadeIn mb-3">Company: </label>
@@ -116,9 +131,11 @@ get(agentsRef).then((snapshot) => {
 
 const logout = document.getElementById('logout');
 logout.addEventListener('click', () => {
-    sessionStorage.removeItem('authToken')
-    window.location.href = 'index.html';
+    signOut(auth).then(() => {
+        window.location.href = 'login.html';
+    })
 })
+
 
     
 

@@ -30,6 +30,12 @@
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
+      <div id="spinner"
+            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
         <div class="container-xxl bg-white p-0">
             <section class="vh-100">
                 <div class="container-fluid">
@@ -82,39 +88,7 @@
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script>
-      const loginbtn = document.getElementById('btnlog');
-      loginbtn.addEventListener('click', function() {
-            const username = document.getElementById('formuser').value;
-            const password = document.getElementById('formpass').value;
-            // Check the username and password here
-            authenticate(username, password);
-      });
-
-      function authenticate(username, password) {
-            // Array of valid credentials
-            const validCredentials = [
-                { username: 'Agent1', password: 'Agent123' },
-                { username: 'Agent2', password: 'Agent234' },
-                // Add more username-password pairs as needed
-            ];
-
-            // Check if the entered credentials are valid
-            const isValidCredential = validCredentials.some(cred =>
-                cred.username === username && cred.password === password
-            );
-
-            if (isValidCredential) {
-                // Set a session token upon successful login
-                sessionStorage.setItem('authToken', 'your_secure_token');
-
-                // Redirect to the admin panel
-                window.location.href = 'agent.html?index=1';
-            } else {
-                alert('Invalid username or password. Please try again.');
-            }
-        }
-    </script>
+    <script type="module" src="js/login.js"></script>
 
 
     <!-- Template Javascript -->

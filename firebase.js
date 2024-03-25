@@ -14,5 +14,3 @@ const firebaseConfig = {
   const database = getDatabase(app);
 
   export { database };
-
-  console.log("hello moto");
