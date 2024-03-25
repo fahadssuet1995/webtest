@@ -59,7 +59,7 @@ get(agentsRef).then((snapshot) => {
             <div class="col-md-9 p-5 mt-lg-3">
                     <h3>About Us</h1>
                     <p>${agentsData.about}</p>
-                    <button type="button" class="btn btn-primary" id ="showModal">Show Modal</button>
+                    <button type="button" class="btn btn-primary" id ="showModal">Claim profile</button>
                 </div>
     `;
     agentEmail.innerHTML = agentsData.email;
