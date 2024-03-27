@@ -34,7 +34,19 @@ if (searchTerm !== '') {
 
         agentsData.forEach((agent, index) => {
             if (agent.name.toLowerCase().includes(searchTerm.toLowerCase())) {
-
+                const reviews = agent.reviews;
+                let totalRate = 0;
+                let numberOfEntries = 0;
+                for (const userId in reviews) {
+                    if (reviews.hasOwnProperty(userId)) {
+                        const userReview = reviews[userId];
+                        const rate = parseInt(userReview.rate); // Convert rate to integer
+                        totalRate += rate;
+                        numberOfEntries++;
+                    }
+                }
+                // Calculate the average rate
+                const averageRate = numberOfEntries > 0 ? totalRate / numberOfEntries : 0;
 
                 const card = document.createElement('div');
                 //brnum.textContent = agent.brnum;
@@ -52,13 +64,7 @@ if (searchTerm !== '') {
                                                 <p class="card-text">${agent.post}</p>
                                                 <p class="card-text">${agent.comp}</p>
                                                 <p class="card-text"><small class="text-muted">No. of properties  ${agent.nofprop}</small></p>
-                                                <span id="rateMe2" class="stars">
-                                                    <i class="bi bi-star" data-index="1"></i>
-                                                    <i class="bi bi-star" data-index="2"></i>
-                                                    <i class="bi bi-star" data-index="3"></i>
-                                                    <i class="bi bi-star" data-index="4"></i>
-                                                    <i class="bi bi-star" data-index="5"></i>
-                                                </span>
+                                                <p class="card-text"><small style="color: #F5B041;">Rating: ${averageRate} out of 5</small></p>
                                             </div>
                                         </div>
                                     </div>
