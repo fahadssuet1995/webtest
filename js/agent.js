@@ -136,59 +136,47 @@ logout.addEventListener('click', () => {
     })
 })
 
+const RevRef = ref(database, 'data/' + searchTerm + '/reviews');
 
+get(RevRef).then((snapshot) => {
+    const revData = snapshot.val();
+    if (revData) {
+        Object.keys(revData).forEach(userId => {
+            const { name, email, rate, comment } = revData[userId];
+            displayReview(name, email, rate, comment);
+        });
+    } else {
+        // Handle case when no reviews are found
+        revbody.innerHTML = '<p>No reviews found.</p>';
+    }
+});
+function displayReview(name, email, rate, comment) {
+    const carouselInner = document.getElementById('revcont');
     
+    const item = document.createElement('div');
+    item.className = 'carousel-item';
+    if (carouselInner.children.length === 0) {
+        // Add active class to the first item
+        item.classList.add('active');
+    }
 
-
-
-/*onValue(agentsRef, (snapshot) => {
-    const agentsData = snapshot.val();
-    const resultsTableBody = document.getElementById('profile');
-    resultsTableBody.innerHTML = '';
-    resultsTableBody.innerHTML = '<h1 class="display-5 animated fadeIn mb-4"></h1> <h1 class="display-5 animated fadeIn mb-4"></h1>';
-
-    agentsData.forEach((agent, index) => {
-        if (agent.name.toLowerCase().includes(searchTerm.toLowerCase())) {
-
-
-            const card = document.createElement('div');
-            //brnum.textContent = agent.brnum;
-            //imageCell.innerHTML = `<img src="${agent.image}">`;
-            card.innerHTML = `
-                        <a class="col" href="about.html?index=${index}" >
-                            <div class="card mb-3 shadow p-3 mb-5 bg-body rounded" style="max-width: 540px;">
-                                <div class="row g-0 ">
-                                    <div class="col-md-4">
-                                        <img src="${agent.profileIMG}" class="img-fluid rounded-start">
-                                    </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                <h5 class="card-title">${agent.name}</h5>
-                                                <p class="card-text">${agent.post}</p>
-                                                <p class="card-text">${agent.comp}</p>
-                                                <p class="card-text"><small class="text-muted">No. of properties  ${agent.nofprop}</small></p>
-                                                <span id="rateMe2" class="stars">
-                                                    <i class="bi bi-star" data-index="1"></i>
-                                                    <i class="bi bi-star" data-index="2"></i>
-                                                    <i class="bi bi-star" data-index="3"></i>
-                                                    <i class="bi bi-star" data-index="4"></i>
-                                                    <i class="bi bi-star" data-index="5"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                        </a>
-              `;
-            resultsTableBody.appendChild(card);
-            //emailCell.textContent = agent.email;
-
-            //console.log(agent.name);
-            //window.location.href = `results.html?results=${JSON.stringify(agent)}`
-        }
-    })
-    $('#spinner').removeClass('show');
-});*/
-
-
-
+    item.innerHTML = `
+<div class="testimonial-item bg-light rounded p-5">
+    <div class="bg-white border rounded p-4">
+        <div class="d-flex align-items-center">
+                <img class="img-fluid flex-shrink-0 rounded" src="img/guest.jpeg" style="width: 45px; height: 45px;">
+                <div class="ps-3">
+                    <h6 class="fw-bold mb-1">${name}</h6>
+                    <div style=" display: flex;flex-direction: column">
+                        <small>Rating: ${rate}</small>
+                        <a href="mailto:${email}"><small>${email}</small></a>
+                    </div>
+                </div>
+        </div>
+        <p style="word-wrap: break-word">${comment}</p>
+    </div>
+</div>
+    `;
+    
+    carouselInner.appendChild(item);
+}

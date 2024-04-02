@@ -22,6 +22,7 @@ const searchResults = document.getElementById('search-results');
 const urlParams = new URLSearchParams(window.location.search);
 const number = urlParams.get('index');
 const body = document.getElementById('profile');
+const revbody = document.getElementById('revcont');
 const agentEmail = document.getElementById('agentEmail');
 const claimbtn = document.getElementById('claimBtn');
 const login = document.getElementById('login');
@@ -29,9 +30,14 @@ const password = document.getElementById('password');
 const emailA = document.getElementById('emailA');
 const passwordA = document.getElementById('passwordA');
 const subRev = document.getElementById('subRev');
+const review = document.getElementById('review');
+const emailU = document.getElementById('emailU');
+const nameU = document.getElementById('nameU');
+const loginU = document.getElementById('loginU');
 var useruid = "";
 var useremail = "";
-var counter = 0;
+
+revbody.innerHTML = '';
 
 
 const searchTerm = number
@@ -54,6 +60,7 @@ get(agentsRef).then((snapshot) => {
     // Calculate the average rate
     const averageRate = numberOfEntries > 0 ? totalRate / numberOfEntries : 0;
     console.log(agentsData);
+
     body.innerHTML = ``;
     body.innerHTML = `
     <div class="row g-0 align-items-center flex-column-reverse flex-md-row" style="margin-top: 8rem;">
@@ -83,6 +90,10 @@ get(agentsRef).then((snapshot) => {
                     <button type="button" class="btn btn-primary" id ="showModal">Claim profile</button>
                 </div>
     `;
+
+
+
+
     agentEmail.innerHTML = agentsData.email;
     const showModalb = document.getElementById('showModal');
     const revModal = document.getElementById('revbtn');
@@ -92,6 +103,38 @@ get(agentsRef).then((snapshot) => {
         const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
         modal.show();
     });
+
+    //----------------------------------------------------------------------------------    
+
+    review.addEventListener('click', () => {
+        if (emailU.value || nameU.value) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            // Test the input email against the regular expression
+            if (!emailRegex.test(emailU.value)) {
+                alert("Invalid email address");
+            } else if (emailRegex.test(emailU.value)) {
+                const close = document.getElementById('close3');
+                close.click();
+                const modal = new bootstrap.Modal(document.getElementById('starModal'));
+                modal.show();
+            }
+        } else {
+            alert("Fill up the form first")
+        }
+    })
+
+    //-------------------------------------------------------------------------------------
+
+    loginU.addEventListener('click', () => {
+        const close = document.getElementById('close3');
+        close.click();
+        const modal = new bootstrap.Modal(document.getElementById('RevModal'));
+        modal.show();
+    })
+
+    //-----------------------------------------------------------------------------------    
+
     revModal.addEventListener('click', () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -100,16 +143,18 @@ get(agentsRef).then((snapshot) => {
                 const modal = new bootstrap.Modal(document.getElementById('starModal'));
                 modal.show();
             } else {
-                const modal = new bootstrap.Modal(document.getElementById('RevModal'));
+                const modal = new bootstrap.Modal(document.getElementById('DecModal'));
                 modal.show();
             }
         })
-
     });
+
+    //-------------------------------------------------------------------------------------
+
     savebtn.addEventListener('click', () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                const saved =  ref(database, 'saved/' + user.uid + '/' + number);
+                const saved = ref(database, 'saved/' + user.uid + '/' + number);
                 set(saved, {
                     number: number
                 }).then(() => {
@@ -122,6 +167,8 @@ get(agentsRef).then((snapshot) => {
         })
     })
 
+    //-------------------------------------------------------------------------------------
+
     claimbtn.addEventListener('click', () => {
         createUserWithEmailAndPassword(auth, agentsData.email, password.value).then((userCredential) => {
             console.log(userCredential.user)
@@ -131,6 +178,9 @@ get(agentsRef).then((snapshot) => {
             alert(error)
         })
     })
+
+
+    //-------------------------------------------------------------------------------------
 
     login.addEventListener('click', () => {
         signInWithEmailAndPassword(auth, emailA.value, passwordA.value).then((userCredential) => {
@@ -148,19 +198,87 @@ get(agentsRef).then((snapshot) => {
         })
     })
 
+    //-------------------------------------------------------------------------------------
+
     subRev.addEventListener('click', () => {
-        const revRef = ref(database, 'data/' + searchTerm + '/reviews/' + useruid);
-        update(revRef, {
-            email: useremail,
-            rate: document.getElementById('range1').value,
-        }).then(() => {
-            alert("Successfully Submitted")
-            const close = document.getElementById('close2');
-            close.click();
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const revRef = ref(database, 'data/' + searchTerm + '/reviews/' + user.displayName);
+                update(revRef, {
+                    name: user.displayName,
+                    email: useremail,
+                    rate: document.getElementById('range1').value,
+                    comment: document.getElementById('comments').value
+                }).then(() => {
+                    window.location.reload();
+                    alert("Successfully Submitted")
+                    const close = document.getElementById('close2');
+                    close.click();
+                })
+            } else if (!user) {
+                const revRef = ref(database, 'data/' + searchTerm + '/reviews/' + nameU.value);
+                update(revRef, {
+                    name: nameU.value,
+                    email: emailU.value,
+                    rate: document.getElementById('range1').value,
+                    comment: document.getElementById('comments').value
+                }).then(() => {
+                    alert("Successfully Submitted")
+                    const close = document.getElementById('close2');
+                    close.click();
+                })
+            }
         })
+
     })
 
 })
+//const revbody = document.getElementById('RevCont');
+const RevRef = ref(database, 'data/' + searchTerm + '/reviews');
+
+get(RevRef).then((snapshot) => {
+    const revData = snapshot.val();
+    if (revData) {
+        Object.keys(revData).forEach(userId => {
+            const { name, email, rate, comment } = revData[userId];
+            displayReview(name, email, rate, comment);
+        });
+    } else {
+        // Handle case when no reviews are found
+        revbody.innerHTML = '<p>No reviews found.</p>';
+    }
+});
+function displayReview(name, email, rate, comment) {
+    const carouselInner = document.getElementById('revcont');
+    
+    const item = document.createElement('div');
+    item.className = 'carousel-item';
+    if (carouselInner.children.length === 0) {
+        // Add active class to the first item
+        item.classList.add('active');
+    }
+
+    item.innerHTML = `
+        <div class="testimonial-item bg-light rounded p-3">
+            <div class="bg-white border rounded p-4">
+                
+                <div class="d-flex align-items-center">
+                <img class="img-fluid flex-shrink-0 rounded" src="img/guest.jpeg" style="width: 45px; height: 45px;">
+                    <div class="ps-3">
+                    
+                        <h6 class="fw-bold mb-1">${name}</h6>
+                        <small>Rating: ${rate}</small>
+                    </div>
+                </div>
+                <p style="word-wrap: break-word">${comment}</p>
+            </div>
+        </div>
+    `;
+    
+    carouselInner.appendChild(item);
+}
+
+
 
 searchButton.addEventListener('click', () => {
     window.location.href = `results.html?input=${searchInput.value}`;
