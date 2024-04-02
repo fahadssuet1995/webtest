@@ -64,7 +64,7 @@ if (searchTerm !== '') {
                                                 <p class="card-text">${agent.post}</p>
                                                 <p class="card-text">${agent.comp}</p>
                                                 <p class="card-text"><small class="text-muted">No. of properties  ${agent.nofprop}</small></p>
-                                                <p class="card-text"><small style="color: #F5B041;">Rating: ${averageRate} out of 5</small></p>
+                                                <p class="card-text"><small style="color: #F5B041;">Rating: ${averageRate.toFixed(1)} out of 5</small></p>
                                             </div>
                                         </div>
                                     </div>
