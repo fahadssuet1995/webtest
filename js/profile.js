@@ -75,8 +75,8 @@ get(agentsRef).then((snapshot) => {
                     <div id="result" class="row row-cols-1 row-cols-md-2">
                         <p class="animated fadeIn mb-3">Company: ${agentsData.comp}</p>
                         <p class="animated fadeIn mb-3">Registration: ${agentsData.brnum}</p>
-                        <a class="bi-envelope animated fadeIn mb-3" href="mailto:${agentsData.email}"> Email</a>
                         <p class="animated fadeIn mb-5">Languages: ${agentsData.lan}</p>
+                        <a class="bi-envelope animated fadeIn mb-3" href="mailto:${agentsData.email}"> Email</a>
                         <a class="bi bi-telephone-outbound" href="tel:${agentsData.phone}"> Call Now</a>
                         <a class="bi bi-whatsapp animated fadeIn mb-3" href="https://wa.me/${agentsData.wapp}"> Whatsapp</a>
                     </div>
