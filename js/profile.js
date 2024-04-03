@@ -33,6 +33,7 @@ const subRev = document.getElementById('subRev');
 const review = document.getElementById('review');
 const emailU = document.getElementById('emailU');
 const nameU = document.getElementById('nameU');
+const phoneU = document.getElementById('phoneU');
 const loginU = document.getElementById('loginU');
 var useruid = "";
 var useremail = "";
@@ -75,6 +76,7 @@ get(agentsRef).then((snapshot) => {
                     <div id="result" class="row row-cols-1 row-cols-md-2">
                         <p class="animated fadeIn mb-3">Company: ${agentsData.comp}</p>
                         <p class="animated fadeIn mb-3">Registration: ${agentsData.brnum}</p>
+                        
                         <p class="animated fadeIn mb-5">Languages: ${agentsData.lan}</p>
                         <a class="bi-envelope animated fadeIn mb-3" href="mailto:${agentsData.email}"> Email</a>
                         <a class="bi bi-telephone-outbound" href="tel:${agentsData.phone}"> Call Now</a>
@@ -220,6 +222,7 @@ get(agentsRef).then((snapshot) => {
                 update(revRef, {
                     name: nameU.value,
                     email: emailU.value,
+                    phone: phoneU.value,
                     rate: document.getElementById('range1').value,
                     comment: document.getElementById('comments').value
                 }).then(() => {
@@ -233,6 +236,7 @@ get(agentsRef).then((snapshot) => {
     })
 
 })
+
 //const revbody = document.getElementById('RevCont');
 const RevRef = ref(database, 'data/' + searchTerm + '/reviews');
 

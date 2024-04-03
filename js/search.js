@@ -19,6 +19,7 @@ const logout = document.getElementById('logout');
 
 onAuthStateChanged(auth, (user) => {
       if (user) {
+            console.log(user)
             logout.classList.remove('d-none')
       } else {
             logout.classList.add('d-none')

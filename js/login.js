@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 const firebaseConfig = {
     apiKey: "AIzaSyBeUNbYNaqXbWHxH4CyFMAUyqFYDQd38Ic",
@@ -19,15 +19,20 @@ const spinner = document.getElementById('spinner');
 
 
 const loginbtn = document.getElementById('btnlog');
+const forgot = document.getElementById('forgot');
 loginbtn.addEventListener('click', function () {
     const username = document.getElementById('formuser').value;
     const password = document.getElementById('formpass').value;
     // Check the username and password here
     authenticate(username, password);
 });
+forgot.addEventListener('click', function () {
+    const username = document.getElementById('formuser').value;
+    forgotPassword(username);
+})
 
 function authenticate(username, password) {
-    signInWithEmailAndPassword(auth, username, password).then ((userCredential) => {
+    signInWithEmailAndPassword(auth, username, password).then((userCredential) => {
         const verify = userCredential.user.emailVerified;
         console.log(userCredential.user.emailVerified);
         //window.location.href = 'agent.html?email=' + userCredential.user.email;
@@ -37,13 +42,15 @@ function authenticate(username, password) {
         } else {
             alert("Please verify your email")
         }
-    }).catch ((error) => {
+    }).catch((error) => {
         alert(error)
     })
 }
+
 function showSpinner() {
     spinner.classList.add('show'); // Show the spinner
 }
+
 function agentinfo(email) {
     const agentsRef = ref(database, 'data');
     onValue(agentsRef, (snapshot) => {
@@ -54,4 +61,17 @@ function agentinfo(email) {
             }
         })
     })
+}
+
+function forgotPassword(email) {
+    if (email) {
+        sendPasswordResetEmail(auth, email).then(() => {
+            alert("Password reset email sent. If you are registered, you will receive an email.")
+        }).catch((error) => {
+            const errorMessage = error.message;
+            alert(errorMessage)
+        });
+    } else {
+        alert("Please enter your email address")
+    }
 }
