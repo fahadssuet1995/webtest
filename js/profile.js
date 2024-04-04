@@ -82,7 +82,10 @@ get(agentsRef).then((snapshot) => {
                         <a class="bi bi-telephone-outbound" href="tel:${agentsData.phone}"> Call Now</a>
                         <a class="bi bi-whatsapp animated fadeIn mb-3" href="https://wa.me/${agentsData.wapp}"> Whatsapp</a>
                     </div>
-                    <a class="animated fadeIn mb-2">Areas: ${agentsData.a1}, ${agentsData.a2}, ${agentsData.a3}</a>
+                    <a class="mb-2">Areas: </a>
+                    <a href="resultA.html?input=${agentsData.a1}" class="animated fadeIn mb-2">${agentsData.a1}</a>
+                    <a href="resultA.html?input=${agentsData.a2}" class="animated fadeIn mb-2">${agentsData.a2}</a>
+                    <a href="resultA.html?input=${agentsData.a3}" class="animated fadeIn mb-2">${agentsData.a3}</a>
                     <p class="animated fadeIn mb-4"><small class="text-muted">Rating: ${averageRate.toFixed(1)} out of 5</small></p>
                 </div> 
             </div>
@@ -92,7 +95,6 @@ get(agentsRef).then((snapshot) => {
                     <button type="button" class="btn btn-primary" id ="showModal">Claim profile</button>
                 </div>
     `;
-
 
 
 
@@ -283,8 +285,4 @@ function displayReview(name, email, rate, comment) {
 }
 
 
-
-searchButton.addEventListener('click', () => {
-    window.location.href = `results.html?input=${searchInput.value}`;
-});
 
