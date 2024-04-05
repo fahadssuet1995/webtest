@@ -71,15 +71,15 @@ get(agentsRef).then((snapshot) => {
                 <div class="col-md-5 p-2 mt-lg-2 mb-3">
                 <button class="btn btn-outline-primary btn-sm" id="revbtn">Review</button>
                 <button class="btn btn-outline-secondary btn-sm" id="savebtn">Save</button>
-                        <h1 class="display-5 animated fadeIn mb-4">${agentsData.name}</h1>
-                        <h3 class=" animated fadeIn mb-4">${agentsData.post}</h3>
+                        <h1 class="display-5 animated fadeIn mb-3">${agentsData.name}</h1>
+                        <h3 class=" animated fadeIn mb-3">${agentsData.post}</h3>
                     <div id="result" class="row row-cols-1 row-cols-md-2">
                         <p class="animated fadeIn mb-3">Company: ${agentsData.comp}</p>
                         <p class="animated fadeIn mb-3">Registration: ${agentsData.brnum}</p>
                         
-                        <p class="animated fadeIn mb-5">Languages: ${agentsData.lan}</p>
+                        <p class="animated fadeIn mb-3">Languages: ${agentsData.lan}</p>
                         <a class="bi-envelope animated fadeIn mb-3" href="mailto:${agentsData.email}"> Email</a>
-                        <a class="bi bi-telephone-outbound" href="tel:${agentsData.phone}"> Call Now</a>
+                        <a class="bi bi-telephone-outbound animated fadeIn mb-3" href="tel:${agentsData.phone}"> Call Now</a>
                         <a class="bi bi-whatsapp animated fadeIn mb-3" href="https://wa.me/${agentsData.wapp}"> Whatsapp</a>
                     </div>
                     <a class="mb-2">Areas: </a>
