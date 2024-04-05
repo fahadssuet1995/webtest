@@ -31,9 +31,11 @@ if (searchTerm !== '') {
         const resultsTableBody = document.getElementById('result');
         resultsTableBody.innerHTML = '';
         resultsTableBody.innerHTML = '<h1 class="display-5 animated fadeIn mb-4"></h1> <h1 class="display-5 animated fadeIn mb-4"></h1>';
+        let matchFound = false; // Flag to check if any match is found
 
         agentsData.forEach((agent, index) => {
             if (agent.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+                matchFound = true;
                 const reviews = agent.reviews;
                 let totalRate = 0;
                 let numberOfEntries = 0;
@@ -72,12 +74,14 @@ if (searchTerm !== '') {
                         </a>
               `;
                 resultsTableBody.appendChild(card);
-                //emailCell.textContent = agent.email;
-
-                //console.log(agent.name);
-                //window.location.href = `results.html?results=${JSON.stringify(agent)}`
-            }
+            } 
         })
+
+        if (!matchFound) {
+            // If no match is found, display an alert
+            alert('No matches found');
+            window.location.href = 'index.html';
+        }
         $('#spinner').removeClass('show');
     });
 }
