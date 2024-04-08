@@ -44,88 +44,91 @@
         <!-- Spinner End -->
 
 
-        <!-- Navbar Start -->
-        <div class="container-fluid nav-bar bg-transparent">
-            <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-                <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
-
-                    <img class="img-fluid" src="img/bigbetter.jpeg" alt="Icon" style="width: 150px; height: 50px;">
-
-                    <!--  <h1 class="m-0 text-primary">Better Agent</h1> -->
-                </a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="Aus.html" class="nav-item nav-link">About</a>
-                        <a href="saved.html" class="nav-item nav-link">Saved</a>
-                        <a href="login.html" class="nav-item nav-link">Agents Login</a>
-                        <a href="loginC.html" class="nav-item nav-link">Clients Login</a>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        <!-- Navbar End -->
 
 
-        <!-- Header Start -->
-        <div class="container-fluid header bg-white p-0">
-            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
-                <div class="col-md-6 p-5 mt-lg-5">
-                    <h1 class="display-5 animated fadeIn mb-4">404 Error</h1>
-                    <nav aria-label="breadcrumb animated fadeIn">
-                        <ol class="breadcrumb text-uppercase">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                            <li class="breadcrumb-item text-body active" aria-current="page">404 Error</li>
-                        </ol>
-                    </nav>
-                </div>
-                <div class="col-md-6 animated fadeIn">
-                    <img class="img-fluid" src="img/header.jpg" alt="">
-                </div>
-            </div>
-        </div>
-        <!-- Header End -->
+
+
 
 
         <!-- Search Start -->
-        <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
-            <div class="container">
-                <div class="row g-2">
-                    <div class="col-md-10">
-                        <div class="row g-2">
-                            <div class="col-md-4">
-                                <input type="text" class="form-control border-0 py-3" placeholder="Search Keyword">
-                            </div>
-                            <div class="col-md-4">
-                                <select class="form-select border-0 py-3">
-                                    <option selected>Property Type</option>
-                                    <option value="1">Property Type 1</option>
-                                    <option value="2">Property Type 2</option>
-                                    <option value="3">Property Type 3</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <select class="form-select border-0 py-3">
-                                    <option selected>Location</option>
-                                    <option value="1">Location 1</option>
-                                    <option value="2">Location 2</option>
-                                    <option value="3">Location 3</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-dark border-0 w-100 py-3">Search</button>
-                    </div>
-                </div>
+        <div>
+            <h3 class="text-center text-primary mt-5">Advertise</h3>
+            <div class="input-group mb-3">
+                <input type="file" class="form-control" id="image">
+            </div>
+            <button style="margin-left: 1.5rem;" id="upload-button" class="btn btn-primary">Upload</button>
+            <div id="image-list" class="container-xxl py-5 wow fadeInUp"></div>
+        </div>
+
+
+        <div>
+            <h3 class="text-center text-primary mt-5">Properties</h3>
+            <div class="input-group mb-3">
+                <select id="position">
+                    <option value="0" selected>Position</option>
+                    <option value="1">1st</option>
+                    <option value="2">2nd</option>
+                    <option value="3">3rd</option>
+                    <option value="4">4th</option>
+                    <option value="5">5th</option>
+                    <option value="6">6th</option>
+                </select>
+                <select id="select">
+                    <option value="0" selected>Select menu</option>
+                    <option value="F">Featured</option>
+                    <option value="S">For Sale</option>
+                    <option value="R">For Rent</option>
+                </select>
+                <input id="index" type="text" class="form-control" placeholder="Agent Index"
+                    aria-describedby="basic-addon1">
+                <input id="amount" type="text" class="form-control" placeholder="Amount"
+                    aria-describedby="basic-addon1">
+                <select id="type">
+                    <option selected>Type</option>
+                    <option value="Appartment">Appartment</option>
+                    <option value="Villa">Villa</option>
+                    <option value="Office">Office</option>
+                    <option value="House">House</option>
+                    <option value="Shop">Shop</option>
+                    <option value="Land">Land</option>
+                    <option value="Building">Building</option>
+                </select>
+                <input id="title" type="text" class="form-control" placeholder="Title" aria-describedby="basic-addon1">
+                <input id="area" type="text" class="form-control" placeholder="Area" aria-describedby="basic-addon1">
+                <select id="forP">
+                    <option value="0" selected>For</option>
+                    <option value="For Sale">For Sale</option>
+                    <option value="For Rent">For Rent</option>
+                </select>
+                <input id="location" type="text" class="form-control" placeholder="Location"
+                    aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <input type="file" class="form-control" id="imageP">
+                <button id="save" class="btn btn-outline-primary">Save</button>
             </div>
         </div>
-        <!-- Search End -->
+
+        <div>
+            <h3 class="text-center text-primary mt-5">Agents</h3>
+            <div class="input-group mb-3">
+                <input id="imageA" type="file" class="form-control">
+                <select id="positionA">
+                    <option value="0" selected>Position</option>
+                    <option value="1">1st</option>
+                    <option value="2">2nd</option>
+                    <option value="3">3rd</option>
+                    <option value="4">4th</option>
+                </select>
+                <input id="nameA" type="text" class="form-control" placeholder="Name" aria-describedby="basic-addon1">
+                <input id="indexA" type="text" class="form-control" placeholder="Agent Index" aria-describedby="basic-addon1">
+                <input id="desigA" type="text" class="form-control" placeholder="Designation"
+                    aria-describedby="basic-addon1">
+                <input id="whatA" type="text" class="form-control" placeholder="Whatsapp"
+                    aria-describedby="basic-addon1">
+                <button id="saveA" class="btn btn-outline-primary">Save</button>
+            </div>
+        </div>
 
 
         <!-- 404 Start -->
@@ -136,7 +139,7 @@
                         <i class="bi bi-exclamation-triangle display-1 text-primary"></i>
                         <h1 class="display-1">404</h1>
                         <h1 class="mb-4">Page Not Found</h1>
-                        <p class="mb-4">We’re sorry, the page you have looked for does not exist in our website! Maybe
+                        <p class="mb-4">We are sorry, the page you have looked for does not exist in our website! Maybe
                             go to our home page or try to use a search?</p>
                         <a class="btn btn-primary py-3 px-5" href="">Go Back To Home</a>
                     </div>
@@ -220,6 +223,7 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script type="module" src="js/admin.js"></script>
 </body>
 
 </html>
